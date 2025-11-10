@@ -18,7 +18,7 @@ class WorkerController extends Controller
             'phone' => 'nullable|string|max:20',
             'image' => 'nullable|string|max:500',
             'nid' => 'required|string|max:50|unique:workers,nid',
-            'service_type' => 'required|string|max:255',
+            'service_type' => 'required|array',
             'expertise_of_service' => 'required|string|max:255',
             'shift' => 'required|string|max:100',
             'rating' => 'nullable|numeric|min:0|max:5|between:0,5',

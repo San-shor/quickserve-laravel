@@ -24,6 +24,7 @@ class Worker extends Model
         'address'
     ];
     protected $casts = [
+        'service_type' => 'array',
         'rating' => 'decimal:2',
         'is_active' => 'boolean'
     ];
