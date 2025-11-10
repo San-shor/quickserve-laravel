@@ -35,4 +35,15 @@ class WorkerController extends Controller
         ], 201);
 
     }
+
+    public function getAllWorkers(): JsonResponse
+{
+    $workers = Worker::all();
+    
+    return response()->json([
+        'success' => true,
+        'data' => $workers,
+        'message' => 'Workers retrieved successfully'
+    ]);
+}
 }

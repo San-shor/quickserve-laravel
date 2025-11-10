@@ -2,6 +2,8 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\WorkerController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -18,4 +20,9 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::post('/workers', [App\Http\Controllers\WorkerController::class, 'createWorker']);
+// Route::post('/workers', [App\Http\Controllers\WorkerController::class, 'createWorker']);
+
+Route::controller(WorkerController::class)->group(function () {
+    Route::get('/getWorkers', 'getAllWorkers');
+    Route::post('/workers', 'createWorker');
+});
