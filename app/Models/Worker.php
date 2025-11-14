@@ -14,6 +14,7 @@ class Worker extends Model
         'email',
         'phone',
         'image',
+        'age',
         'nid',
         'service_type',
         'expertise_of_service',

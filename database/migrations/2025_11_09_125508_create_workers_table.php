@@ -18,6 +18,8 @@ return new class extends Migration
             $table->string('name');
             $table->string('email')->unique(); 
             $table->string('phone')->nullable();
+
+            $table->string('age');
             $table->string('image')->nullable(); 
             $table->string('nid')->unique();
             $table->string('service_type'); 
@@ -26,7 +28,7 @@ return new class extends Migration
             $table->decimal('rating', 2, 1)->default(0);
             $table->text('feedback')->nullable(); 
             $table->boolean('is_active')->default(true);
-            $table->text('address')->nullable();
+           
             $table->timestamps();
         });
     }

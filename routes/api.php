@@ -26,3 +26,5 @@ Route::controller(WorkerController::class)->group(function () {
     Route::get('/getWorkers', 'getAllWorkers');
     Route::post('/workers', 'createWorker');
 });
+
+Route::post('/workers/bulk', [WorkerController::class, 'createBulkWorkers']);
