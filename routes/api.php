@@ -24,6 +24,7 @@ use Tymon\JWTAuth\Facades\JWTAuth;
 // Route::post('/workers', [App\Http\Controllers\WorkerController::class, 'createWorker']);
 
 Route::post('/register', [AuthController::class, 'register']);
+Route::post('/login', [AuthController::class, 'login']);
 
 
 
