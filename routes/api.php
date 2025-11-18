@@ -3,7 +3,10 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\WorkerController;
-
+use App\Http\Controllers\AuthController;
+use App\Models\User;
+use Illuminate\Support\Facades\Hash;
+use Tymon\JWTAuth\Facades\JWTAuth;
 
 /*
 |--------------------------------------------------------------------------
@@ -16,11 +19,13 @@ use App\Http\Controllers\WorkerController;
 |
 */
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
-});
+
 
 // Route::post('/workers', [App\Http\Controllers\WorkerController::class, 'createWorker']);
+
+Route::post('/register', [AuthController::class, 'register']);
+
+
 
 Route::controller(WorkerController::class)->group(function () {
     Route::get('/getWorkers', 'getAllWorkers');

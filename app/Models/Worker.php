@@ -15,7 +15,7 @@ class Worker extends Model
         'phone',
         'image',
         'age',
-        'nid',
+       
         'service_type',
         'expertise_of_service',
         'shift',

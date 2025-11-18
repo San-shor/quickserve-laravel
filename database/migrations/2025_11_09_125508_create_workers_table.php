@@ -21,9 +21,9 @@ return new class extends Migration
 
             $table->string('age');
             $table->string('image')->nullable(); 
-            $table->string('nid')->unique();
-            $table->string('service_type'); 
-            $table->string('expertise_of_service'); 
+           
+            $table->json('service_type'); 
+            $table->integer('expertise_of_service'); 
             $table->string('shift');
             $table->decimal('rating', 2, 1)->default(0);
             $table->text('feedback')->nullable(); 
