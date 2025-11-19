@@ -132,4 +132,74 @@ class WorkerController extends Controller
             'message' => 'Bulk worker creation completed. Created: ' . count($createdWorkers) . ', Errors: ' . count($errors)
         ], 201);
     }
+
+    public function updateWorker(Request $request, $id): JsonResponse
+    {
+        $worker = Worker::find($id);
+
+        if (!$worker) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Worker not found'
+            ], 404);
+        }
+
+        $validator = Validator::make($request->all(), [
+            'name' => 'sometimes|string|max:255',
+            'email' => 'sometimes|email|unique:workers,email,' . $id,
+            'phone' => 'nullable|string|max:20',
+            'age' => 'sometimes|integer|min:18',
+            'image' => 'nullable|string',
+
+            'service_type' => 'sometimes|array',
+            'service_type.*' => 'string|max:255',
+            'expertise_of_service' => 'sometimes|integer|max:255',
+            'shift' => 'sometimes|string|max:100',
+            'rating' => 'nullable|numeric|min:0|max:5|between:0,5',
+            'feedback' => 'nullable|string',
+
+            'is_active' => 'sometimes|boolean',
+        ]);
+
+        if ($validator->fails()) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Validation failed',
+                'errors' => $validator->errors()
+            ], 422);
+        }
+
+        $validatedData = $validator->validated();
+
+        // Handle service_type array to JSON conversion
+        if (isset($validatedData['service_type']) && is_array($validatedData['service_type'])) {
+            $validatedData['service_type'] = json_encode($validatedData['service_type']);
+        }
+
+        $worker->update($validatedData);
+
+        return response()->json([
+            'success' => true,
+            'data' => $worker,
+            'message' => 'Worker updated successfully'
+        ]);
+    }
+    public function deleteWorker($id): JsonResponse
+    {
+        $worker = Worker::find($id);
+
+        if (!$worker) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Worker not found'
+            ], 404);
+        }
+
+        $worker->delete();
+
+        return response()->json([
+            'success' => true,
+            'message' => 'Worker deleted successfully'
+        ]);
+    }
 }

@@ -23,7 +23,7 @@ use Tymon\JWTAuth\Facades\JWTAuth;
 
 // Route::post('/workers', [App\Http\Controllers\WorkerController::class, 'createWorker']);
 
-Route::post('/register', [AuthController::class, 'register']);
+Route::post('/signup', [AuthController::class, 'register']);
 Route::post('/login', [AuthController::class, 'login']);
 
 
@@ -31,6 +31,8 @@ Route::post('/login', [AuthController::class, 'login']);
 Route::controller(WorkerController::class)->group(function () {
     Route::get('/getWorkers', 'getAllWorkers');
     Route::post('/workers', 'createWorker');
+    Route::put('/workers/{id}','updateWorker');
+    Route::delete('/workers/{id}',  'deleteWorker');
 });
 
 Route::post('/workers/bulk', [WorkerController::class, 'createBulkWorkers']);
