@@ -12,20 +12,20 @@ class AuthController extends Controller
 {
     public function register(Request $request)
     {
-        \Log::info('Register method reached!');
+        
 
         $validator = Validator::make($request->all(), [
             'name' => 'required|string|max:255',
             'email' => 'required|string|email|max:255|unique:users',
             'password' => 'required|string|min:8|confirmed',
-            'role' => 'required|in:admin,manager,worker,customer',
+            'role' => 'required|in:Admin,Moderator,Worker,Customer',
             'phone' => 'nullable|string|max:20',
         ]);
 
         if ($validator->fails()) {
             return response()->json([
                 'success' => false,
-                'message' => 'Validation failed',
+                'message' =>'Validation failed',
                 'errors' => $validator->errors()
             ], 422);
         }
