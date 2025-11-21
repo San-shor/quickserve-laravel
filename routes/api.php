@@ -7,6 +7,7 @@ use App\Http\Controllers\AuthController;
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
 use Tymon\JWTAuth\Facades\JWTAuth;
+use App\Http\Controllers\ServiceController;
 
 /*
 |--------------------------------------------------------------------------
@@ -33,6 +34,13 @@ Route::controller(WorkerController::class)->group(function () {
     Route::post('/workers', 'createWorker');
     Route::put('/workers/{id}','updateWorker');
     Route::delete('/workers/{id}',  'deleteWorker');
+});
+
+Route::controller(ServiceController::class)->group(function () {
+    Route::post('/services', 'createServices');
+    Route::get('/getServices','getServices');
+    Route::put('/services/{id}',  'updateServices');
+    Route::delete('/services/{id}',  'deleteServices');
 });
 
 Route::post('/workers/bulk', [WorkerController::class, 'createBulkWorkers']);
